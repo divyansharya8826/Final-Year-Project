@@ -1,4 +1,3 @@
--- Active: 1743693859021@@127.0.0.1@3306
 from flask import Flask, jsonify, render_template, request, session, redirect, url_for, flash
 import os
 import pandas as pd
