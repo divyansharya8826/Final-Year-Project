@@ -18,8 +18,8 @@ def home():
 def predict_sentiment():
     if request.method == 'POST':
         # Load the saved model and tokenizer
-        model = AutoModelForSequenceClassification.from_pretrained("LaBSE(2)")
-        tokenizer = AutoTokenizer.from_pretrained("LaBSE(2)")
+        model = AutoModelForSequenceClassification.from_pretrained("LaBSE")
+        tokenizer = AutoTokenizer.from_pretrained("LaBSE")
 
         # Get the text input from the form
         text = request.form['text']
