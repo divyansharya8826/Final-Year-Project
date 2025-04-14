@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="ToxiScan - Get help and contact our support team for your content analysis needs" />
+        <title>ToxiScan | Help & Contact</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css') }}"
+        />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            .contact-options {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 1.75rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .contact-option {
+                background-color: var(--card-bg);
+                border-radius: var(--border-radius-sm);
+                padding: 1.75rem;
+                box-shadow: var(--shadow);
+                border: 1px solid rgba(229, 231, 235, 0.5);
+                transition: var(--transition);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .contact-option:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lg);
+                border-color: rgba(99, 102, 241, 0.2);
+            }
+
+            .contact-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 54px;
+                height: 54px;
+                background: var(--primary-transparent);
+                border-radius: 14px;
+                margin-bottom: 1.25rem;
+                transition: var(--transition);
+            }
+
+            .contact-option:hover .contact-icon {
+                background: var(--primary);
+            }
+
+            .contact-option:hover .contact-icon i {
+                color: white;
+            }
+
+            .contact-icon i {
+                font-size: 1.35rem;
+                color: var(--primary);
+                transition: var(--transition);
+            }
+
+            .contact-title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                margin-bottom: 0.85rem;
+                color: var(--text-dark);
+            }
+
+            .contact-description {
+                color: var(--text-light);
+                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+                line-height: 1.6;
+                flex-grow: 1;
+            }
+
+            .contact-link {
+                display: inline-flex;
+                align-items: center;
+                color: var(--primary);
+                font-weight: 500;
+                text-decoration: none;
+                transition: var(--transition);
+                padding: 0.5rem 0;
+                margin-top: auto;
+            }
+
+            .contact-link i {
+                font-size: 0.85rem;
+                margin-left: 0.5rem;
+                transition: var(--transition);
+            }
+
+            .contact-link:hover {
+                color: var(--primary-dark);
+            }
+
+            .contact-link:hover i {
+                transform: translateX(4px);
+            }
+
+            .form-container {
+                background-color: var(--card-bg);
+                border-radius: var(--border-radius);
+                padding: 2.25rem;
+                box-shadow: var(--shadow);
+                border: 1px solid rgba(229, 231, 235, 0.5);
+                margin-bottom: 3rem;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1.75rem;
+                color: var(--text-dark);
+                position: relative;
+                padding-bottom: 0.75rem;
+            }
+
+            .form-title::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 60px;
+                height: 3px;
+                background: linear-gradient(90deg, var(--primary), var(--primary-light));
+                border-radius: 2px;
+            }
+
+            .form-group {
+                margin-bottom: 1.75rem;
+            }
+
+            .form-label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+                color: var(--text-dark);
+            }
+
+            .form-input,
+            .form-select,
+            .form-textarea {
+                width: 100%;
+                padding: 0.85rem 1rem;
+                font-family: inherit;
+                font-size: 1rem;
+                color: var(--text-dark);
+                border: 1px solid var(--neutral);
+                border-radius: var(--border-radius-sm);
+                background-color: #fdfdff;
+                transition: var(--transition);
+            }
+
+            .form-input:focus,
+            .form-select:focus,
+            .form-textarea:focus {
+                outline: none;
+                border-color: var(--primary-light);
+                box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            }
+
+            .form-select {
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 1rem center;
+                background-size: 1em;
+                padding-right: 2.5rem;
+            }
+
+            .form-textarea {
+                min-height: 150px;
+                resize: vertical;
+            }
+
+            .faq-section {
+                margin-top: 3rem;
+            }
+
+            .faq-item {
+                border: 1px solid var(--neutral);
+                border-radius: var(--border-radius-sm);
+                margin-bottom: 1rem;
+                transition: var(--transition);
+                overflow: hidden;
+            }
+
+            .faq-item:hover {
+                border-color: var(--primary-light);
+                box-shadow: var(--shadow-sm);
+            }
+
+            .faq-question {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--text-dark);
+                padding: 1.25rem;
+                cursor: pointer;
+                display: flex;
+                align-items: flex-start;
+                transition: var(--transition);
+            }
+
+            .faq-item:hover .faq-question {
+                color: var(--primary);
+            }
+
+            .faq-question i {
+                color: var(--primary);
+                margin-right: 0.85rem;
+                margin-top: 0.25rem;
+                transition: var(--transition);
+            }
+
+            .faq-answer {
+                padding: 0 1.25rem 1.25rem 2.75rem;
+                color: var(--text-light);
+                line-height: 1.7;
+            }
+
+            .faq-item.active {
+                border-color: var(--primary-light);
+                box-shadow: var(--shadow-sm);
+            }
+
+            .breadcrumb a {
+                color: var(--text-muted);
+                text-decoration: none;
+                transition: var(--transition);
+            }
+
+            .breadcrumb a:hover {
+                color: var(--primary);
+            }
+
+            .breadcrumb-separator {
+                margin: 0 0.5rem;
+                color: var(--text-muted);
+            }
+
+            .breadcrumb-current {
+                color: var(--primary);
+                font-weight: 500;
+            }
+
+            /* Accessibility improvements */
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border-width: 0;
+            }
+
+            @media (max-width: 768px) {
+                .form-container {
+                    padding: 1.5rem;
+                }
+                .contact-options {
+                    gap: 1.25rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <header>
+                <div class="glass-panel"></div>
+                <div class="header-content">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        </div>
+                        <h1>ToxiScan</h1>
+                    </div>
+                    <p>AI-Powered Content Analysis Platform</p>
+                </div>
+                <div class="header-decoration">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                </div>
+            </header>
+
+            <nav class="main-nav" aria-label="Main Navigation">
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+                        <li>
+                            <a href="{{ url_for('contact') }}" class="nav-link active" aria-current="page">Help & Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main>
+                <div class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="{{ url_for('home') }}">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                    <span class="breadcrumb-current">Help & Contact</span>
+                </div>
+
+                <section>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-headset" aria-hidden="true"></i>
+                            </div>
+                            <h2>Help & Contact</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="instruction">
+                                Need assistance with ToxiScan? We're here to help! Choose one of
+                                the contact options below or check our frequently asked
+                                questions.
+                            </p>
+
+                            <div class="contact-options">
+                                <div class="contact-option">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="contact-title">Email Support</h3>
+                                    <p class="contact-description">
+                                        Our support team typically responds within 24 hours on
+                                        business days for all your technical and account-related questions.
+                                    </p>
+                                    <a href="mailto:support@toxiscan.ai" class="contact-link">
+                                        support@toxiscan.ai <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
+                                <div class="contact-option">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="contact-title">Live Chat</h3>
+                                    <p class="contact-description">
+                                        Available Monday to Friday, 9 AM - 5 PM EST for immediate
+                                        assistance with your content analysis questions.
+                                    </p>
+                                    <a href="#" class="contact-link">
+                                        Start a Chat <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
+                                <div class="contact-option">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-book-open" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="contact-title">Knowledge Base</h3>
+                                    <p class="contact-description">
+                                        Browse our comprehensive documentation and guides to get the most
+                                        out of ToxiScan's content analysis features.
+                                    </p>
+                                    <a href="#" class="contact-link">
+                                        View Articles <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="form-container">
+                                <h3 class="form-title">Send Us a Message</h3>
+
+                                <form id="contact-form" aria-label="Contact form">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            class="form-input"
+                                            placeholder="Enter your name"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            class="form-input"
+                                            placeholder="Enter your email"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <select id="subject" class="form-select" required>
+                                            <option value="" disabled selected>Select a topic</option>
+                                            <option value="technical-support">Technical Support</option>
+                                            <option value="account-billing">Account & Billing</option>
+                                            <option value="api-integration">API Integration</option>
+                                            <option value="feature-request">Feature Request</option>
+                                            <option value="bug-report">Bug Report</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea
+                                            id="message"
+                                            class="form-textarea"
+                                            placeholder="Describe your issue or question in detail..."
+                                            required
+                                        ></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                        <span>Send Message</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="faq-section">
+                                <h3 class="form-title">Frequently Asked Questions</h3>
+
+                                <div class="faq-item">
+                                    <div class="faq-question" tabindex="0">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                        <span>What is ToxiScan and how does it work?</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>
+                                            ToxiScan is an AI-powered content analysis platform that
+                                            evaluates text for potentially toxic or harmful language.
+                                            Our machine learning model analyzes submitted text and
+                                            provides a confidence score on whether the content is safe
+                                            or potentially problematic, helping content moderators and businesses 
+                                            ensure their platforms remain safe and welcoming.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question" tabindex="0">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                        <span>How accurate is ToxiScan's analysis?</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>
+                                            ToxiScan uses advanced machine learning algorithms trained
+                                            on diverse datasets to provide high accuracy. However, as
+                                            with any AI system, it may not be 100% accurate in all
+                                            cases. Our models typically achieve over 95% accuracy on standard 
+                                            benchmarks, and we continuously improve our models based on user
+                                            feedback and new data to enhance performance.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question" tabindex="0">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                        <span>Is my data secure when using ToxiScan?</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>
+                                            Yes, we take data security very seriously. All text
+                                            submissions are encrypted in transit and at rest using industry-standard
+                                            protocols. We do not store your submitted content longer than necessary for
+                                            analysis, and we never share your data with third parties.
+                                            For more details, please review our Privacy Policy.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-question" tabindex="0">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                        <span>How can I integrate ToxiScan with my application?</span>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>
+                                            ToxiScan offers a robust API for seamless integration with
+                                            your applications. Our API documentation provides detailed
+                                            instructions on authentication, endpoints, request
+                                            parameters, and response formats. We offer SDKs for popular programming
+                                            languages including Python, JavaScript, and Java. For enterprise
+                                            integration support, please contact our sales team.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <p>
+                    ToxiScan | Advanced Content Analysis ©
+                    <span id="current-year">2025</span>
+                </p>
+                <div class="footer-links">
+                    <a href="https://github.com/divyansharya8826/Final-Year-Project">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> Github
+                    </a>
+                    <a href="#" aria-label="Help Center">
+                        <i class="fas fa-question-circle" aria-hidden="true"></i> Help
+                    </a>
+                </div>
+            </footer>
+        </div>
+
+        <script>
+            document.getElementById("current-year").textContent =
+                new Date().getFullYear();
+
+            document
+                .getElementById("contact-form")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    const notification = document.createElement("div");
+                    notification.className = "notification notification-info";
+                    notification.setAttribute("role", "alert");
+                    notification.innerHTML = `
+                        <div class="notification-content">
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            <div>
+                                <strong>Message Sent!</strong>
+                                <p>We'll get back to you as soon as possible.</p>
+                            </div>
+                        </div>
+                        <button class="notification-close" aria-label="Close notification">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>
+                    `;
+
+                    document.body.appendChild(notification);
+
+                    notification.querySelector(".notification-close").addEventListener("click", function() {
+                        notification.style.animation = "slideOut 0.4s forwards";
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 400);
+                    });
+
+                    setTimeout(() => {
+                        notification.style.animation = "slideOut 0.4s forwards";
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 400);
+                    }, 5000);
+
+                    this.reset();
+                });
+
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    faqItem.classList.toggle('active');
+                });
+                
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const faqItem = question.parentElement;
+                        faqItem.classList.toggle('active');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

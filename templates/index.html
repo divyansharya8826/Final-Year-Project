@@ -1,105 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toxicity Detection System</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <div class="container">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ToxiScan | AI Content Analysis</title>
+        <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles.css') }}"
+        />
+        <link rel="stylesheet" href="static/styles.css" />
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet"
+        />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+        />
+        <link href="static\logo\toxicity_detection_logo.png" rel="icon" type="image/x-icon" />
+    </head>
+    <body>
+        <div class="app-container">
+        <header>
+            <div class="glass-panel"></div>
             <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-shield-alt"></i>
-                    <h1>ToxiScan</h1>
+            <div class="logo">
+                <div class="logo-icon">
+                <i class="fas fa-shield-alt"></i>
                 </div>
-                <p>Toxicity Detection System</p>
+                <h1>ToxiScan</h1>
             </div>
-        </div>
-    </header>
-    
-    <main class="container">
-        <div class="card input-card">
-            <div class="card-header">
-                <i class="fas fa-keyboard"></i>
-                <h2>Enter Text for Analysis</h2>
+            <p>AI-Powered Content Analysis Platform</p>
             </div>
-            <div class="card-body">
-                <p class="instruction">Type or paste content below to analyze its toxicity level using our machine learning model.</p>
+            <div class="header-decoration">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <div class="nav-container">
+            <ul class="nav-links">
+                <li>
+                <a href="{{ url_for('home') }}" class="nav-link active">Home</a>
+                </li>
+                <li>
+                <a href="{{ url_for('contact') }}" class="nav-link"
+                    >Help & Contact</a
+                >
+                </li>
+            </ul>
+            </div>
+        </nav>
+
+        <main>
+            <div class="breadcrumb">
+            <a href="{{ url_for('home') }}">Home</a>
+            <span class="breadcrumb-separator"
+                ><i class="fas fa-chevron-right"></i
+            ></span>
+            <span class="breadcrumb-current">Help & Contact</span>
+            </div>
+            <section class="input-section">
+            <div class="card">
+                <div class="card-header">
+                <div class="icon-wrapper">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <h2>Submit Text for Analysis</h2>
+                </div>
+                <div class="card-body">
+                <p class="instruction">
+                    Enter text below to analyze its toxicity level using our
+                    advanced machine learning model.
+                </p>
                 <div class="form-group">
-                    <textarea id="text-input" placeholder="Enter your text here..."></textarea>
+                    <div class="textarea-wrapper">
+                    <textarea
+                        id="text-input"
+                        placeholder="Type or paste your text here..."
+                    ></textarea>
+                    <div class="textarea-focus-border"></div>
+                    </div>
                 </div>
                 <div class="button-group">
                     <button class="btn btn-primary" id="analyze-btn">
-                        <i class="fas fa-search"></i> Analyze Text
+                    <i class="fas fa-search"></i>
+                    <span>Analyze Content</span>
                     </button>
                     <button class="btn btn-secondary" id="clear-btn">
-                        <i class="fas fa-eraser"></i> Clear
+                    <i class="fas fa-eraser"></i>
+                    <span>Clear</span>
                     </button>
                 </div>
                 <div class="loader-container">
-                    <div class="loader" id="loader"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="card result-card" id="results-section">
-            <div class="card-header">
-                <i class="fas fa-chart-bar"></i>
-                <h2>Analysis Results</h2>
-            </div>
-            <div class="card-body" id="result-content">
-                <div class="result-summary">
-                    <h3>Toxicity Assessment</h3>
-                    <div class="badge-container">
-                        <span id="result-badge"></span>
+                    <div class="loader" id="loader">
+                    <svg viewBox="0 0 50 50">
+                        <circle
+                        class="loader-circle"
+                        cx="25"
+                        cy="25"
+                        r="20"
+                        ></circle>
+                    </svg>
                     </div>
                 </div>
-                
-                <p class="result-explanation">The AI model has analyzed your text and determined the following probabilities:</p>
-                
+                </div>
+            </div>
+            </section>
+
+            <section class="results-section" id="results-section">
+            <div class="card">
+                <div class="card-header">
+                <div class="icon-wrapper">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h2>Analysis Results</h2>
+                </div>
+                <div class="card-body" id="result-content">
+                <div class="result-summary">
+                    <h3>Content Assessment</h3>
+                    <div class="badge-container">
+                    <span id="result-badge"></span>
+                    </div>
+                </div>
+
+                <p class="result-explanation">
+                    Our AI model has analyzed your content and determined the
+                    following:
+                </p>
+
                 <div class="probability-section">
                     <div class="probability-item">
-                        <div class="probability-header">
-                            <span class="probability-label safe">
-                                <i class="fas fa-check-circle"></i> Non-Toxic
-                            </span>
-                            <span class="probability-value" id="non-toxic-percentage">0%</span>
-                        </div>
-                        <div class="meter-container">
-                            <div class="meter-fill non-toxic-meter" id="non-toxic-meter"></div>
-                        </div>
+                    <div class="probability-header">
+                        <span class="probability-label safe">
+                        <i class="fas fa-check-circle"></i> Safe Content
+                        </span>
+                        <span class="probability-value" id="non-toxic-percentage"
+                        >0%</span
+                        >
                     </div>
-                    
+                    <div class="meter-container">
+                        <div
+                        class="meter-fill non-toxic-meter"
+                        id="non-toxic-meter"
+                        ></div>
+                    </div>
+                    </div>
+
                     <div class="probability-item">
-                        <div class="probability-header">
-                            <span class="probability-label toxic">
-                                <i class="fas fa-exclamation-triangle"></i> Toxic
-                            </span>
-                            <span class="probability-value" id="toxic-percentage">0%</span>
-                        </div>
-                        <div class="meter-container">
-                            <div class="meter-fill toxic-meter" id="toxic-meter"></div>
-                        </div>
+                    <div class="probability-header">
+                        <span class="probability-label toxic">
+                        <i class="fas fa-exclamation-triangle"></i> Toxic Content
+                        </span>
+                        <span class="probability-value" id="toxic-percentage"
+                        >0%</span
+                        >
+                    </div>
+                    <div class="meter-container">
+                        <div class="meter-fill toxic-meter" id="toxic-meter"></div>
+                    </div>
                     </div>
                 </div>
-                
+
                 <div class="result-details" id="result-details">
-                    <p>This assessment is based on machine learning algorithms trained on diverse datasets of online content.</p>
+                    <p>
+                    This assessment is generated using advanced machine learning
+                    algorithms trained on diverse datasets of online content.
+                    </p>
+                </div>
                 </div>
             </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>
+            ToxiScan | Advanced Content Analysis © <span id="current-year"></span>
+            </p>
+            <div class="footer-links">
+            <a href="https://github.com/divyansharya8826/Final-Year-Project"
+                ><i class="fa-brands fa-github"></i> Github</a
+            >
+            <a href="{{ url_for('contact') }}"
+                ><i class="fas fa-question-circle"></i> Help</a
+            >
+            </div>
+        </footer>
         </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <p>Toxicity Detection System | Final Year Project © <span id="current-year"></span></p>
-        </div>
-    </footer>
-    
-    <script src="static/script.js"></script>
-</body>
+
+        <script src="static/script.js"></script>
+    </body>
 </html>
