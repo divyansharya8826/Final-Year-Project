@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toxicity Detection System</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>ToxiScan</h1>
+                </div>
+                <p>Toxicity Detection System</p>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="card input-card">
+            <div class="card-header">
+                <i class="fas fa-keyboard"></i>
+                <h2>Enter Text for Analysis</h2>
+            </div>
+            <div class="card-body">
+                <p class="instruction">Type or paste content below to analyze its toxicity level using our machine learning model.</p>
+                <div class="form-group">
+                    <textarea id="text-input" placeholder="Enter your text here..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" id="analyze-btn">
+                        <i class="fas fa-search"></i> Analyze Text
+                    </button>
+                    <button class="btn btn-secondary" id="clear-btn">
+                        <i class="fas fa-eraser"></i> Clear
+                    </button>
+                </div>
+                <div class="loader-container">
+                    <div class="loader" id="loader"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card result-card" id="results-section">
+            <div class="card-header">
+                <i class="fas fa-chart-bar"></i>
+                <h2>Analysis Results</h2>
+            </div>
+            <div class="card-body" id="result-content">
+                <div class="result-summary">
+                    <h3>Toxicity Assessment</h3>
+                    <div class="badge-container">
+                        <span id="result-badge"></span>
+                    </div>
+                </div>
+                
+                <p class="result-explanation">The AI model has analyzed your text and determined the following probabilities:</p>
+                
+                <div class="probability-section">
+                    <div class="probability-item">
+                        <div class="probability-header">
+                            <span class="probability-label safe">
+                                <i class="fas fa-check-circle"></i> Non-Toxic
+                            </span>
+                            <span class="probability-value" id="non-toxic-percentage">0%</span>
+                        </div>
+                        <div class="meter-container">
+                            <div class="meter-fill non-toxic-meter" id="non-toxic-meter"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="probability-item">
+                        <div class="probability-header">
+                            <span class="probability-label toxic">
+                                <i class="fas fa-exclamation-triangle"></i> Toxic
+                            </span>
+                            <span class="probability-value" id="toxic-percentage">0%</span>
+                        </div>
+                        <div class="meter-container">
+                            <div class="meter-fill toxic-meter" id="toxic-meter"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-details" id="result-details">
+                    <p>This assessment is based on machine learning algorithms trained on diverse datasets of online content.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Toxicity Detection System | Final Year Project © <span id="current-year"></span></p>
+        </div>
+    </footer>
+    
+    <script src="static/script.js"></script>
+</body>
+</html>

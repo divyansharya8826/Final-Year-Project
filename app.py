@@ -5,14 +5,14 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import numpy as np
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 app.secret_key = os.urandom(24)  # Set a secret key for session management
 
 
 @app.route('/')
 def home():
-    return "Hello, World!" # replace it with render_template('index.html or name of the home page file)
+    return render_template('index.html') # replace it with render_template('index.html or name of the home page file)
 
 @app.route('/api/predict_sentiment', methods=['POST', 'GET'])
 def predict_sentiment():
