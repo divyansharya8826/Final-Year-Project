@@ -49,6 +49,6 @@ def predict_sentiment():
         'predicted_label': output_label,
         'probabilities': probabilities.numpy().tolist()
     })
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
